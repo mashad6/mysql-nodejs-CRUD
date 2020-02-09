@@ -1,19 +1,17 @@
 const mysql =require('mysql');
 const express=require('express');
 const bodyParser=require('body-parser');
-
-
-
+const list= require('./routes/hero')
 const app=express();
 
 app.use(bodyParser.json());
-
+app.use('/list',list);
 
 var mysqlConnection = mysql.createConnection({
-host:'localhost',
-user : 'root',
-password:'passwordgiven',
-database : 'herodb'
+  host:'localhost',
+  user : 'root',
+  password:'passwordgiven',
+  database : 'herodb'
 })
 
 mysqlConnection.connect((err)=>{
@@ -23,7 +21,7 @@ mysqlConnection.connect((err)=>{
         console.log('failed@! \n Error: '+ JSON.stringify(err,undefined,2));    
 })
 
-app.listen(4000,console.log(`listening server on port 3000`));
+app.listen(4000,console.log(`listening server on port 4000`));
 
 
 const cors = require('cors');
@@ -94,14 +92,14 @@ app.put('/power/:id', (req, res) => {
 })
 
 /////////////hero
-app.get('/hero',(req,res)=>{
-    mysqlConnection.query(`SELECT * from heros`,(err,rows,fields)=>{
-        if(!err)
-            res.send(rows);
-        else   
-            console.log(err);    
-    })
-});
+// app.get('/hero',(req,res)=>{
+//     mysqlConnection.query(`SELECT * from heros`,(err,rows,fields)=>{
+//         if(!err)
+//             res.send(rows);
+//         else   
+//             console.log(err);    
+//     })
+// });
 
 
 
